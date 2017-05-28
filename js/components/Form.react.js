@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { changeForm } from '../actions/AppActions';
 import LoadingButton from './LoadingButton.react';
 import ErrorMessage from './ErrorMessage.react';
+import FormInput from './FormElement.react'
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
@@ -19,14 +20,11 @@ class LoginForm extends Component {
     return(
       <form className="form" onSubmit={this._onSubmit.bind(this)}>
         <ErrorMessage />
-        <div className="form__field-wrapper">
-          <input className="form__field-input" type="text" id="username" value={this.props.data.username} placeholder="frank.underwood" onChange={this._changeUsername.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-          <label className="form__field-label" htmlFor="username">Username</label>
-        </div>
-        <div className="form__field-wrapper">
-          <input className="form__field-input" id="password" type="password" value={this.props.data.password} placeholder="••••••••••"  onChange={this._changePassword.bind(this)} />
-          <label className="form__field-label" htmlFor="password">Password</label>
-        </div>
+
+        <FormInput type={"text"} id={"username"}  value={this.props.data.username} placeholder="frank.underwood" onChange={this._changeUsername.bind(this)} label={"USER NAME"}/>
+        <FormInput type={"text"} id={"email"}  value={this.props.data.email} placeholder="abd@abc.com" onChange={this._changeEmail.bind(this)} label={"Email"}/>
+        <FormInput type={"password"} id={"password"}  value={this.props.data.password} placeholder="••••••••••" onChange={this._changePassword.bind(this)} label={"Password"}/>
+
         <div className="form__submit-btn-wrapper">
           {this.props.currentlySending ? (
             <LoadingButton />
@@ -56,6 +54,14 @@ class LoginForm extends Component {
     this._emitChange(newState);
   }
 
+  _changeEmail(evt){
+    var newState = this._mergeWithCurrentState({
+      email: evt.target.value
+    });
+
+    this._emitChange(newState);
+  }
+
   // Merges the current state with a change
   _mergeWithCurrentState(change) {
     return assign(this.props.data, change);
@@ -69,7 +75,7 @@ class LoginForm extends Component {
   // onSubmit call the passed onSubmit function
   _onSubmit(evt) {
     evt.preventDefault();
-    this.props.onSubmit(this.props.data.username, this.props.data.password);
+    this.props.onSubmit(this.props.data.username, this.props.data.password, this.props.data.email);
   }
 }
 

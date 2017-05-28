@@ -41,50 +41,50 @@ var server = {
    */
   login(username, password, callback) {
 
-          axios.post("http://localhost:8080/myNextProject/public/api/auth/login",{
-            email:username+"@naji.com",
-            password:password
-          })
-          .then(function (response) {
-              if (callback) callback({
-                authenticated: true,
-                token: Math.random().toString(36).substring(7)
-              });
-             console.log("response ", response)
-          })
-          .catch(function (error) {
-              if (callback) callback({
-                authenticated: false,
-                error: error
-              });
-            console.log("error ", error )
-          })
+          // axios.post("http://localhost:8080/backEndMusic/public/api/auth/login",{
+          //   email:username+"@naji.com",
+          //   password:password
+          // })
+          // .then(function (response) {
+          //     if (callback) callback({
+          //       authenticated: true,
+          //       token: Math.random().toString(36).substring(7)
+          //     });
+          //    console.log("response ", response)
+          // })
+          // .catch(function (error) {
+          //     if (callback) callback({
+          //       authenticated: false,
+          //       error: error
+          //     });
+          //   console.log("error ", error )
+          // })
 
 
-    // const userExists = this.doesUserExist(username);
-    // // If the user exists and the password fits log the user in
-    // if (userExists && bcrypt.compareSync(password, users[username])) {
-    //   if (callback) callback({
-    //     authenticated: true,
-    //     token: Math.random().toString(36).substring(7)
-    //   });
-    // } else {
-    //   if (userExists) {
-    //     // If the password is wrong, throw the password-wrong error
-    //     var error = {
-    //       type: "password-wrong"
-    //     }
-    //   } else {
-    //     // If the user doesn't exist, throw the user-doesnt-exist
-    //     var error = {
-    //       type: "user-doesnt-exist"
-    //     }
-    //   }
-    //   if (callback) callback({
-    //     authenticated: false,
-    //     error: error
-    //   });
-    // }
+    const userExists = this.doesUserExist(username);
+    // If the user exists and the password fits log the user in
+    if (userExists && bcrypt.compareSync(password, users[username])) {
+      if (callback) callback({
+        authenticated: true,
+        token: Math.random().toString(36).substring(7)
+      });
+    } else {
+      if (userExists) {
+        // If the password is wrong, throw the password-wrong error
+        var error = {
+          type: "password-wrong"
+        }
+      } else {
+        // If the user doesn't exist, throw the user-doesnt-exist
+        var error = {
+          type: "user-doesnt-exist"
+        }
+      }
+      if (callback) callback({
+        authenticated: false,
+        error: error
+      });
+    }
   },
   /**
    * Pretends to register a user
@@ -97,7 +97,7 @@ var server = {
           console.log("username xxxyyy ", username);
           // console.log("cpassword", password);
           // console.log("callback ", callback);
-          axios.post("http://localhost:8080/myNextProject/public/api/auth/signup",{
+          /*axios.post("http://localhost:8080/backEndMusic/public/api/auth/signup",{
             name:username,
             email:username+"@naji.com",
             password:password
@@ -118,25 +118,25 @@ var server = {
                       }
                     });
             console.log("error ", error )
-          })
+          })*/
 
-    // if (!this.doesUserExist(username)) {
-    //   // If the username isn't used, hash the password with bcrypt to store it
-    //   // in localStorage
-    //   users[username] = bcrypt.hashSync(password, salt);
-    //   localStorage.users = JSON.stringify(users);
-    //   if (callback) callback({
-    //     registered: true
-    //   });
-    // } else {
-    //   // If the username is already in use, throw the username-exists error
-    //   if (callback) callback({
-    //     registered: false,
-    //     error: {
-    //       type: "username-exists"
-    //     }
-    //   });
-    // }
+    if (!this.doesUserExist(username)) {
+      // If the username isn't used, hash the password with bcrypt to store it
+      // in localStorage
+      users[username] = bcrypt.hashSync(password, salt);
+      localStorage.users = JSON.stringify(users);
+      if (callback) callback({
+        registered: true
+      });
+    } else {
+      // If the username is already in use, throw the username-exists error
+      if (callback) callback({
+        registered: false,
+        error: {
+          type: "username-exists"
+        }
+      });
+    }
   },
   /**
    * Pretends to log a user out

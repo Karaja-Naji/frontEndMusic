@@ -108,12 +108,18 @@ export function logout() {
  * @param  {string} username The username of the new user
  * @param  {string} password The password of the new user
  */
-export function register(username, password) {
+export function register(username, password, email) {
   return (dispatch) => {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     // If no username or password was specified, throw a field-missing error
-    if (anyElementsEmpty({ username, password })) {
+    if (anyElementsEmpty({ username, password, email })) {
+      dispatch(setErrorMessage(errorMessages.FIELD_MISSING));
+      dispatch(sendingRequest(false));
+      return;
+    }
+
+    if (emailIsWrong(email)) {
       dispatch(setErrorMessage(errorMessages.FIELD_MISSING));
       dispatch(sendingRequest(false));
       return;
@@ -128,7 +134,7 @@ export function register(username, password) {
         return;
       }
       // Use auth.js to fake a request
-      auth.register(username, hash, (success, err) => {
+      auth.register(username, hash, email, (success, err) => {
         // When the request is finished, hide the loading indicator
         dispatch(sendingRequest(false));
         dispatch(setAuthState(success));
@@ -230,4 +236,15 @@ function anyElementsEmpty(elements) {
     }
   }
   return false;
+}
+
+function emailIsWrong(email) {
+  console.log("emailIsWrong");
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //if the email is wrong
+    if(!re.test(email) ){
+      return true;
+    }
+    
+   return false;
 }

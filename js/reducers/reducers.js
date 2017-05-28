@@ -20,7 +20,8 @@ import auth from '../utils/auth';
 const initialState = {
   formState: {
     username: '',
-    password: ''
+    password: '',
+    email:''
   },
   currentlySending: false,
   loggedIn: auth.loggedIn(),

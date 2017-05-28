@@ -37,6 +37,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { homeReducer } from './reducers/reducers';
 import FontFaceObserver from 'fontfaceobserver';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // When Open Sans is loaded, add the js-open-sans-loaded class to the body
 // which swaps out the fonts
@@ -61,8 +62,13 @@ import '../css/main.css';
 
 // Creates the Redux reducer with the redux-thunk middleware, which allows us
 // to do asynchronous things in the actions
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(homeReducer);
+// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+// const store = createStoreWithMiddleware(homeReducer);
+
+const store = createStore(homeReducer, composeWithDevTools(
+  applyMiddleware(thunk),
+  // other store enhancers if any
+));
 
 
 function checkAuth(nextState, replaceState) {

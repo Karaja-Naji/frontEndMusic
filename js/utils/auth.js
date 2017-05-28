@@ -53,10 +53,10 @@ var auth = {
    * @param  {string}   password The password of the user
    * @param  {Function} callback Called after a user was registered on the remote server
    */
-  register(username, password, callback) {
+  register(username, password, email, callback) {
     console.log("register auth ");
     // Post a fake request
-    request.post('/register', { username, password }, (response) => {
+    request.post('/register', { username, password, email }, (response) => {
       // If the user was successfully registered, log them in
       if (response.registered === true) {
         this.login(username, password, callback);
