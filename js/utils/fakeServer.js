@@ -16,6 +16,8 @@ var server = {
    * Populates the users var, similar to seeding a database in the real world
    */
   init() {
+    
+    this.getBlogs();
     // Get the previous users from localStorage if they exist, otherwise
     // populates the localStorage
     if (localStorage.users === undefined || !localStorage.encrypted) {
@@ -93,13 +95,14 @@ var server = {
    * @param {string} password The password of the user to register
    * @param {?callback} callback Called after a user is registered
    */
-  register(username, password, callback) {
+  register(username, password, email, callback) {
           console.log("username xxxyyy ", username);
+          console.log("username email  ", email);
           // console.log("cpassword", password);
           // console.log("callback ", callback);
-          /*axios.post("http://localhost:8080/backEndMusic/public/api/auth/signup",{
+          axios.post("http://localhost:8080/myNextProject/public/api/auth/signup",{
             name:username,
-            email:username+"@naji.com",
+            email:email,
             password:password
           })
           .then(function (response) {
@@ -118,25 +121,25 @@ var server = {
                       }
                     });
             console.log("error ", error )
-          })*/
+          })
 
-    if (!this.doesUserExist(username)) {
-      // If the username isn't used, hash the password with bcrypt to store it
-      // in localStorage
-      users[username] = bcrypt.hashSync(password, salt);
-      localStorage.users = JSON.stringify(users);
-      if (callback) callback({
-        registered: true
-      });
-    } else {
-      // If the username is already in use, throw the username-exists error
-      if (callback) callback({
-        registered: false,
-        error: {
-          type: "username-exists"
-        }
-      });
-    }
+    // if (!this.doesUserExist(username)) {
+    //   // If the username isn't used, hash the password with bcrypt to store it
+    //   // in localStorage
+    //   users[username] = bcrypt.hashSync(password, salt);
+    //   localStorage.users = JSON.stringify(users);
+    //   if (callback) callback({
+    //     registered: true
+    //   });
+    // } else {
+    //   // If the username is already in use, throw the username-exists error
+    //   if (callback) callback({
+    //     registered: false,
+    //     error: {
+    //       type: "username-exists"
+    //     }
+    //   });
+    // }
   },
   /**
    * Pretends to log a user out
@@ -153,7 +156,22 @@ var server = {
    */
   doesUserExist(username) {
     return !(users[username] === undefined);
+  },
+
+  getBlogs(data, callback = 0){
+
+    console.log("initial pagexx yy");
+    axios.get("http://localhost:8080/myNextProject/public/api/hello")
+        .then(function (response) {
+
+           console.log("response ", response)
+        })
+        .catch(function (error) {
+
+          console.log("error ", error )
+        })
   }
+
 }
 
 server.init();

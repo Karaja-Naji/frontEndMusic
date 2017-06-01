@@ -20,10 +20,13 @@ var fakeRequest = {
           server.login(data.username, data.password, callback);
           break;
         case '/register':
-          server.register(data.username, data.password, callback);
+          server.register(data.username, data.password, data.email, callback);
           break;
         case '/logout':
           server.logout(callback);
+          break;
+        case '/blogs':
+          server.register(data, callback);
           break;
         default:
           break;

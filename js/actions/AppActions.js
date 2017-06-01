@@ -120,7 +120,7 @@ export function register(username, password, email) {
     }
 
     if (emailIsWrong(email)) {
-      dispatch(setErrorMessage(errorMessages.FIELD_MISSING));
+      dispatch(setErrorMessage(errorMessages.EMAIL_ERROR));
       dispatch(sendingRequest(false));
       return;
     }

@@ -56,6 +56,7 @@ import RegisterPage from './components/pages/RegisterPage.react';
 import Dashboard from './components/pages/Dashboard.react';
 import NotFound from './components/pages/NotFound.react';
 import App from './components/App.react';
+import Blogs from './components/pages/Blogs.react';
 
 // Import the CSS file, which webpack transfers to the build folder
 import '../css/main.css';
@@ -108,6 +109,7 @@ ReactDOM.render(
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/blogs" component={Blogs} />
         </Route>
         <Route path="*" component={NotFound} />
       </Route>
