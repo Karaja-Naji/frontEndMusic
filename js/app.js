@@ -35,7 +35,7 @@ import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { homeReducer } from './reducers/reducers';
+import rootReducer  from './reducers/index';
 import FontFaceObserver from 'fontfaceobserver';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -66,7 +66,7 @@ import '../css/main.css';
 // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 // const store = createStoreWithMiddleware(homeReducer);
 
-const store = createStore(homeReducer, composeWithDevTools(
+const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
   // other store enhancers if any
 ));

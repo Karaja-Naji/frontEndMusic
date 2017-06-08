@@ -14,13 +14,13 @@ import { GET_BLOGS, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
-import auth from '../utils/auth';
+//import auth from '../utils/auth';
 
 // The initial application state
 const initialState = [{
   auther:"",
   content:"",
-  title
+  title:""
 }];
 
 // Takes care of changing the application state
