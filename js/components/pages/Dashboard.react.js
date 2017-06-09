@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CategoryForm from "./dashboard/CategoryForm.react"
 
 class Dashboard extends Component {
   render() {
@@ -24,6 +25,13 @@ class Dashboard extends Component {
           </ol>
           <p>If you registered a new user, the credentials are now securely saved to localStorage. The next time you visit the website with this browser, you will be able to login with that username/password combination.</p>
         </section>
+
+        <section>
+          <h1>Category</h1>
+          <CategoryForm />
+
+        </section>
+
       </article>
     );
   }

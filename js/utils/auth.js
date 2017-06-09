@@ -66,6 +66,7 @@ var auth = {
       }
     });
   },
+  
   onChange() {}
 }
 

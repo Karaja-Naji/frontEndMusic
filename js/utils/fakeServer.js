@@ -96,50 +96,50 @@ var server = {
    * @param {?callback} callback Called after a user is registered
    */
   register(username, password, email, callback) {
-          console.log("username xxxyyy ", username);
-          console.log("username email  ", email);
-          // console.log("cpassword", password);
-          // console.log("callback ", callback);
-          axios.post("http://localhost:8080/myNextProject/public/api/auth/signup",{
-            name:username,
-            email:email,
-            password:password
-          })
-          .then(function (response) {
-                  users[username] = bcrypt.hashSync(password, salt);
-                  localStorage.users = JSON.stringify(users);
-                  if (callback) callback({
-                    registered: true
-                  });
-             console.log("response ", response)
-          })
-          .catch(function (error) {
-                  if (callback) callback({
-                      registered: false,
-                      error: {
-                        type: "username-exists"
-                      }
-                    });
-            console.log("error ", error )
-          })
+          // console.log("username xxxyyy ", username);
+          // console.log("username email  ", email);
+          // // console.log("cpassword", password);
+          // // console.log("callback ", callback);
+          // axios.post("http://localhost:8080/myNextProject/public/api/auth/signup",{
+          //   name:username,
+          //   email:email,
+          //   password:password
+          // })
+          // .then(function (response) {
+          //         users[username] = bcrypt.hashSync(password, salt);
+          //         localStorage.users = JSON.stringify(users);
+          //         if (callback) callback({
+          //           registered: true
+          //         });
+          //    console.log("response ", response)
+          // })
+          // .catch(function (error) {
+          //         if (callback) callback({
+          //             registered: false,
+          //             error: {
+          //               type: "username-exists"
+          //             }
+          //           });
+          //   console.log("error ", error )
+          // })
 
-    // if (!this.doesUserExist(username)) {
-    //   // If the username isn't used, hash the password with bcrypt to store it
-    //   // in localStorage
-    //   users[username] = bcrypt.hashSync(password, salt);
-    //   localStorage.users = JSON.stringify(users);
-    //   if (callback) callback({
-    //     registered: true
-    //   });
-    // } else {
-    //   // If the username is already in use, throw the username-exists error
-    //   if (callback) callback({
-    //     registered: false,
-    //     error: {
-    //       type: "username-exists"
-    //     }
-    //   });
-    // }
+    if (!this.doesUserExist(username)) {
+      // If the username isn't used, hash the password with bcrypt to store it
+      // in localStorage
+      users[username] = bcrypt.hashSync(password, salt);
+      localStorage.users = JSON.stringify(users);
+      if (callback) callback({
+        registered: true
+      });
+    } else {
+      // If the username is already in use, throw the username-exists error
+      if (callback) callback({
+        registered: false,
+        error: {
+          type: "username-exists"
+        }
+      });
+    }
   },
   /**
    * Pretends to log a user out
@@ -160,16 +160,16 @@ var server = {
 
   getBlogs(data, callback = 0){
 
-    console.log("initial pagexx yy");
-    axios.get("http://localhost:8080/myNextProject/public/api/hello")
-        .then(function (response) {
+    // console.log("initial pagexx yy");
+    // axios.get("http://localhost:8080/myNextProject/public/api/hello")
+    //     .then(function (response) {
 
-           console.log("response ", response)
-        })
-        .catch(function (error) {
+    //        console.log("response ", response)
+    //     })
+    //     .catch(function (error) {
 
-          console.log("error ", error )
-        })
+    //       console.log("error ", error )
+    //     })
   }
 
 }

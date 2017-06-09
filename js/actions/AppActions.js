@@ -239,7 +239,7 @@ function anyElementsEmpty(elements) {
 }
 
 function emailIsWrong(email) {
-  console.log("emailIsWrong");
+  //console.log("emailIsWrong");
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     //if the email is wrong
     if(!re.test(email) ){
